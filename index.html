@@ -1,10 +1,38 @@
 <!doctype html>
-<html>
+<html lang="fr">
 <head>
-  <title>ProsTerra</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>ProsTerra — Science & Environnement</title>
+  <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-  <h1>ProsTerra</h1>
-  <p>Onglet scientifique en construction.</p>
+  <header class="container header">
+    <a class="logo" href="index.html">ProsTerra</a>
+    <nav class="nav">
+      <a class="active" href="index.html">Accueil</a>
+      <a href="articles.html">Articles</a>
+      <a href="sources.html">Sources</a>
+    </nav>
+  </header>
+
+  <main class="container">
+    <section class="card">
+      <h1>Onglet scientifique</h1>
+      <p class="muted">Articles écrits par moi + sources fiables (rapports, DOI, institutions).</p>
+      <div class="actions">
+        <a class="button" href="articles.html">Lire les articles</a>
+        <a class="button ghost" href="sources.html">Voir les sources</a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="container footer">
+    <span class="muted">© <span id="year"></span> — ProsTerra</span>
+  </footer>
+
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
 </body>
 </html>
