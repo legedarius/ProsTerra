@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Articles — ProsTerra</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="container header">
+    <a class="logo" href="index.html">ProsTerra</a>
+    <nav class="nav">
+      <a href="index.html">Accueil</a>
+      <a class="active" href="articles.html">Articles</a>
+      <a href="sources.html">Sources</a>
+    </nav>
+  </header>
+
+  <main class="container">
+    <section class="card">
+      <h1>Articles</h1>
+      <div id="list"></div>
+      <p class="muted">Ajoute des articles en créant un fichier dans <code>articles/</code> puis une entrée dans <code>articles.json</code>.</p>
+    </section>
+  </main>
+
+  <footer class="container footer">
+    <span class="muted">© <span id="year"></span> — ProsTerra</span>
+  </footer>
+
+  <script src="app.js"></script>
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+    loadArticlesList();
+  </script>
+</body>
+</html>
