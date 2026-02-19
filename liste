@@ -1,0 +1,42 @@
+async function fetchJSON(path) {
+  const res = await fetch(path, { cache: "no-store" });
+  if (!res.ok) throw new Error("Impossible de charger " + path);
+  return res.json();
+}
+
+function escapeHTML(s) {
+  return (s || "").replace(/[&<>"']/g, m => ({ "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;" }[m]));
+}
+
+function linkToArticle(a){ return `article.html?id=${encodeURIComponent(a.id)}`; }
+
+window.loadArticlesList = async function () {
+  const list = document.getElementById("list");
+  const articles = await fetchJSON("articles.json");
+  if (!articles.length) {
+    list.innerHTML = `<div class="item"><p class="muted">Aucun article pour l’instant.</p></div>`;
+    return;
+  }
+  list.innerHTML = articles.map(a => `
+    <a class="item" href="${linkToArticle(a)}">
+      <strong>${escapeHTML(a.title)}</strong>
+      <div class="muted">${escapeHTML(a.summary)}</div>
+    </a>
+  `).join("");
+};
+
+window.loadSources = async function () {
+  const box = document.getElementById("sources");
+  const sources = await fetchJSON("sources.json");
+  if (!sources.length) {
+    box.innerHTML = `<div class="item"><p class="muted">Aucune source générale pour l’instant.</p></div>`;
+    return;
+  }
+  box.innerHTML = sources.map(s => `
+    <div class="item">
+      <strong>${escapeHTML(s.name)}</strong>
+      <div class="muted">${escapeHTML(s.note || "")}</div>
+      <div class="muted"><a href="${escapeHTML(s.url)}" target="_blank" rel="noopener noreferrer">Ouvrir</a></div>
+    </div>
+  `).join("");
+};
